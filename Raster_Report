@@ -1,0 +1,19 @@
+#imports the arcpy, sys and csv module
+import arcpy, sys, csv
+#allows user to input workspace
+
+# Import arcpy module
+import arcpy
+
+#gdbPath = arcpy.GetParameterAsText(0)
+arcpy.env.workspace = ("C:\\Users\\tdonyoe\\Documents\\WWF\\Data\\Monday.gdb")
+
+rows = arcpy.SearchCursor("Reclass_Raster", "", "", "Area_SQKM; Land_Cover")
+
+file = open("SummaryReport.txt","w" )
+
+# Iterate through the rows in the cursor
+for row in rows:
+    file.write( row.Land_Cover+" with AREA of "+ str(row.Area_SQKM) +" is impacted by visitors\n" );
+
+file.close()

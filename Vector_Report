@@ -1,0 +1,18 @@
+#imports the arcpy, sys and csv module
+import arcpy, sys, csv
+#allows user to input workspace
+
+# Import arcpy module
+
+arcpy.env.workspace = ("C:\\Users\\tdonyoe\\Documents\\WWF\\Data\\Monday.gdb")
+
+rows = arcpy.da.SearchCursor("Road", "", "", "Type; LandUse_Risk")
+
+
+file = open("SummaryReport.txt","w" )
+
+# Iterate through the rows in the cursor
+for row in rows:
+    file.write( row.Type+" with AREA of "+ str(row.LandUse_Risk) +" is impacted by visitors\n" );
+
+file.close()
